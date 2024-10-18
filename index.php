@@ -1,5 +1,7 @@
 <?php
-include_once "./php/products.php";
+include_once "./php/controller/Database.php";
+include_once "./php/controller/RenderShopeBlock.php";
+include_once "./database.php";
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -22,11 +24,11 @@ include_once "./php/products.php";
     <main>
     <section>
             <?php
-            if (isset($sectinProduct) && !empty($sectinProduct)) {
-                echo $sectinProduct;
-            } else {
-                echo "Нет доступных товаров.";
-            }
+            $db = new DataBase(HOST_DB, USER_DB, PASSWORD_DB, DATABASE_DB);
+            $sql = $db->query("SELECT * FROM product");
+            $shope = new RenderShopeBlock($sql);
+            $shope->render();
+            $db->close();
             ?>
         </section>
     </main>

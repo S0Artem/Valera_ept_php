@@ -1,5 +1,5 @@
 <?php
-
+include_once "./database.php";
 return
 [
     'paths' => [
@@ -11,10 +11,10 @@ return
         'default_environment' => 'development',
         'production' => [
             'adapter' => 'mysql',
-            'host' => '127.0.0.1',
-            'name' => 'valera_ept_php',
-            'user' => 'root',
-            'pass' => '',
+            'host' => HOST_DB,
+            'name' => DATABASE_DB,
+            'user' => USER_DB,
+            'pass' => PASSWORD_DB,
             'port' => '3306',
             'charset' => 'utf8',
         ],
