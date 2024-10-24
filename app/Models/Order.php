@@ -1,9 +1,8 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/db/ConnectBD.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/database.php";
-
-function ProductsModell() {
-    $id = (int) $_POST['id'];
+function OrderModell() {
+    $id = isset($_POST['id']) ? (int) $_POST['id'] : (isset($_SESSION['order_data']['id']) ? $_SESSION['order_data']['id'] : null);
     $db = new mysqli(HOST_DB, USER_DB, PASSWORD_DB, DATABASE_DB);
     $stmt = $db->prepare("SELECT id, name, prise, amount FROM product WHERE id = ?");
     if ($stmt) {
@@ -14,5 +13,8 @@ function ProductsModell() {
         $stmt->close();
     }
     $db->close();
+    if (!empty($data)) {
+        $_SESSION['order_data'] = $data[0]; // Сохраняем только первый элемент (если есть)
+    }
     return $data;
 }

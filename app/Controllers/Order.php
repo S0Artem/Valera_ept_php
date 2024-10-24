@@ -1,6 +1,11 @@
 <?php
+session_start();
+if (isset($_SESSION['message'])) {
+    echo "<div>{$_SESSION['message']}</div>"; // Выводим сообщение
+    unset($_SESSION['message']); // Удаляем сообщение из сессии
+}
 function OrderId(){
-    $product = ProductsModell();
+    $product = OrderModell();
     $id = null; // Инициализация переменной
     foreach ($product as $row) {
         if (isset($row['id'])) {
@@ -11,7 +16,7 @@ function OrderId(){
 }
 
 function OrderName(){
-    $product = ProductsModell();
+    $product = OrderModell();
     $name = null;
     foreach ($product as $row) {
         if (isset($row['name'])) {
@@ -22,7 +27,7 @@ function OrderName(){
 }
 
 function OrderPrise(){
-    $product = ProductsModell();
+    $product = OrderModell();
     $prise = null;
     foreach ($product as $row) {
         if (isset($row['prise'])) {
@@ -33,7 +38,7 @@ function OrderPrise(){
 }
 
 function OrderAmount(){
-    $product = ProductsModell();
+    $product = OrderModell();
     $amount = null;
     foreach ($product as $row) {
         if (isset($row['amount'])) {

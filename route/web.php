@@ -11,3 +11,7 @@ else if($_SERVER['REQUEST_URI'] == "/Order"){
     require_once $_SERVER['DOCUMENT_ROOT'] . "/app/Controllers/Order.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/app/Models/Order.php";
 }
+
+else if($_SERVER['REQUEST_URI'] == "/Order/Record"){
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/app/Models/Record.php";
+}
