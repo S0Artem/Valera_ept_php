@@ -20,6 +20,3 @@ class DataBase{
         mysqli_close($this->conn);
     }
 }
-
-
-

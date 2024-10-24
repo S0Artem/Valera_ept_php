@@ -1,30 +1,16 @@
-<?
-class RenderShopeBlock {
-    private $sql;
-
-    public function __construct($sql) {
-        $this->sql = $sql;
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . "/app/Models/Products.php";
+function Products(){
+    $sql = ProductsModell();
+    while ($row = mysqli_fetch_assoc($sql)) {
+        $products[] = [
+            'id' => $row['id'],
+            'name' => $row['name'],
+            'prise' => $row['prise'],
+            'amount' => $row['amount']
+        ];
     }
-
-    private function show() {
-        $products = [];
-        if ($this->sql) {
-            while ($row = mysqli_fetch_assoc($this->sql)) {
-                $products[] = [
-                    'id' => $row['id'],
-                    'name' => $row['name'],
-                    'prise' => $row['prise'],
-                    'amount' => $row['amount']
-                ];
-            }
-            mysqli_free_result($this->sql);
-        }
-        return $products;
-    }
-
-    public function render() {
-        $products = $this->show();
-        if (!empty($products))
+    if (!empty($products))
         {
             ob_start();
             echo '<ul style="width: 18rem;">';
@@ -35,7 +21,7 @@ class RenderShopeBlock {
                 echo '<li>Количество: ' . htmlspecialchars($product['amount']) . '</li>';
                 
                 if ($product['amount'] > 0) {
-                    echo '<form action="./php/order.php" method="POST">';
+                    echo '<form action="/Order" method="POST">';
                     echo '<input type="hidden" name="id" value="' . htmlspecialchars($product['id']) . '" style="display: none">';
                     echo '<button type="submit" class="btn btn-primary mt-2">Купить</button>';
                     echo '</form>';
@@ -54,6 +40,4 @@ class RenderShopeBlock {
         {
             echo "Нет доступных товаров.";
         }
-
-    }
 }
