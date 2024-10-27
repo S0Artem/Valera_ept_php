@@ -2,7 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . "/db/ConnectBD.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/database.php";
 function OrderModell() {
-    $id = isset($_POST['id']) ? (int) $_POST['id'] : (isset($_SESSION['order_data']['id']) ? $_SESSION['order_data']['id'] : null);
+    $id = isset($_GET['id']) ? (int) $_GET['id'] : (isset($_SESSION['order_data']['id']) ? $_SESSION['order_data']['id'] : null);
     $db = new mysqli(HOST_DB, USER_DB, PASSWORD_DB, DATABASE_DB);
     $stmt = $db->prepare("SELECT id, name, prise, amount FROM product WHERE id = ?");
     if ($stmt) {

@@ -1,6 +1,6 @@
 <?
 class DataBase{
-    private $conn;//я не шарю че он за тип данных
+    private mysqli $conn;//я не шарю че он за тип данных
 
     public function __construct($host, $user, $password, $database)
     {
